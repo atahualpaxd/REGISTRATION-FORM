@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Universidad Peruana de Ciencias Aplicadas</title>
+  <link rel="icon" href="imagenes/icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <video autoplay loop muted playsinline class="bg-video">
+    <source src="videos/hacker.mp4" type="video/mp4">
+  </video>
+
+  <div class="bg-animated"></div>
+  <div class="container">
+    <header class="main-header">
+      <div class="logo">
+        <img src="imagenes/upclogo.png" alt="Logo de la Institución">
+</div>
+      <h1>FORMULARIO DE MATRÍCULA</h1>
+      <h2>Universidad Peruana de Ciencias Aplicadas</h2>
+    </header>
+
+ 
+    <form id="enrollmentForm" novalidate>
+      <div class="columns-grid">
+        
+        <section class="card column">
+          <h3>1. Datos Personales</h3>
+
+          <div class="form-group">
+            <label class="label-title">Tipo de Documento:</label>
+            <div class="radio-group">
+              <label><input type="radio" name="docType" value="DNI" checked> DNI</label>
+              <label><input type="radio" name="docType" value="CE"> Carnet de Extranjería</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="docNumber">Número de Documento:</label>
+            <input type="text" id="docNumber" maxlength="8" placeholder="Ingrese 8 dígitos numéricos">
+            <span class="error-message" id="errorDocNumber"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="fullName">Nombres y Apellidos Completos:</label>
+            <input type="text" id="fullName" placeholder="Ej. Juan Pérez">
+            <span class="error-message" id="errorFullName"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="birthDate">Fecha de Nacimiento:</label>
+            <input type="date" id="birthDate">
+            <span class="error-message" id="errorBirthDate"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="age">Edad Calculada:</label>
+            <input type="text" id="age" readonly placeholder="Se calculará automáticamente">
+            <span class="error-message" id="errorAge"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="mobilePhone">Teléfono Celular:</label>
+            <input type="text" id="mobilePhone" maxlength="9" placeholder="9XXXXXXXX">
+            <span class="error-message" id="errorMobilePhone"></span>
+          </div>
+
+          <div class="form-group">
+            <label>Teléfono Fijo:</label>
+            <div class="phone-fijo-container">
+              <input type="text" id="areaCode" maxlength="2" placeholder="01">
+              <input type="text" id="landline" maxlength="7" placeholder="1234567">
+            </div>
+            <span class="error-message" id="errorLandline"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="label-title">Sexo:</label>
+            <div class="radio-group">
+              <label><input type="radio" name="gender" value="Masculino"> Masculino</label>
+              <label><input type="radio" name="gender" value="Femenino"> Femenino</label>
+            </div>
+            <span class="error-message" id="errorGender"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="label-title">Colegio de Procedencia:</label>
+            <div class="radio-group">
+              <label><input type="radio" name="schoolType" value="Nacional"> Nacional</label>
+              <label><input type="radio" name="schoolType" value="Particular"> Particular</label>
+            </div>
+            <span class="error-message" id="errorSchoolType"></span>
+          </div>
+        </section>
+
+        <section class="card column">
+          <h3>2. Cursos y Turnos</h3>
+
+          <div class="form-group">
+            <label class="label-title">Selección de Cursos (S/ 100.00 c/u):</label>
+            <div class="checkbox-grid">
+              <label><input type="checkbox" name="course" value="100"> Introducción a la Programación</label>
+              <label><input type="checkbox" name="course" value="100"> Base de Datos I</label>
+              <label><input type="checkbox" name="course" value="100"> Desarrollo Web I</label>
+              <label><input type="checkbox" name="course" value="100"> Algoritmos y Estructura de Datos</label>
+              <label><input type="checkbox" name="course" value="100"> Redes y Conectividad</label>
+              <label><input type="checkbox" name="course" value="100"> Sistemas Operativos</label>
+              <label><input type="checkbox" name="course" value="100"> Ciberseguridad Básica</label>
+              <label><input type="checkbox" name="course" value="100"> Arquitectura de Software</label>
+            </div>
+            <span class="error-message" id="errorCourses"></span>
+          </div>
+
+          <div class="total-box">
+            <span>TOTAL A PAGAR:</span>
+            <strong id="totalPrice">S/ 0.00</strong>
+          </div>
+
+          <div class="form-group">
+            <label class="label-title">Turnos de Estudio (Selección múltiple):</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="shift" value="Mañana"> Mañana</label>
+              <label><input type="checkbox" name="shift" value="Tarde"> Tarde</label>
+              <label><input type="checkbox" name="shift" value="Noche"> Noche</label>
+            </div>
+            <span class="error-message" id="errorShifts"></span>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="actions-panel">
+        <button type="button" id="btnClear" class="btn btn-secondary">Limpiar / Borrar</button>
+        <button type="submit" class="btn btn-primary">Matricularse</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="successModal" class="modal-backdrop">
+    <div class="modal-content">
+      <h2>¡CONFIRMACIÓN EXITOSA!</h2>
+      <p id="modalMessage">Sus datos son correctos, usted ha sido matriculado [Nombre]</p>
+      <button type="button" id="btnModalClose" class="btn btn-primary">Aceptar</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
